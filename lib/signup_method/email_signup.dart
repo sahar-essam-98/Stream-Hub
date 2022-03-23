@@ -275,6 +275,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                           Navigator.pushReplacementNamed(context, '/congrats_screen');
                         });
                       },
+
                       child: Text(
                         'Sign up',
                         style: TextStyle(
