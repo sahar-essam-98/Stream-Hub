@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_hub/api/controllers.dart';
 import 'package:stream_hub/widgets/constants.dart';
 
 class EmailSignUp extends StatefulWidget {
@@ -18,11 +19,14 @@ class _EmailSignUpState extends State<EmailSignUp> {
   late TextEditingController _passwordTextEditingController;
   late TextEditingController _confirmPasswordTextEditingController;
 
+  var data;
+  var isloading = false;
+
   @override
   void initState() {
     super.initState();
     _nameTextEditingController = TextEditingController();
-    _nameTextEditingController = TextEditingController();
+    _emailTextEditingController = TextEditingController();
     _passwordTextEditingController = TextEditingController();
     _confirmPasswordTextEditingController = TextEditingController();
   }
@@ -35,6 +39,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
     _confirmPasswordTextEditingController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -255,7 +260,19 @@ class _EmailSignUpState extends State<EmailSignUp> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/email_activation');
+                        setState(() {
+                          isloading = true;
+                        });
+                        var name = _nameTextEditingController.text;
+                        var email = _nameTextEditingController.text;
+                        var password = _nameTextEditingController.text;
+                        var confirm = _nameTextEditingController.text;
+                        Controller().Register(name: name,email: email,password: password,confirmPassword: confirm,mobile: "").then((value) {
+                          setState(() {
+                            isloading = false;
+                          });
+                          Navigator.pushReplacementNamed(context, '/congrats_screen');
+                        });
                       },
                       child: Text(
                         'Sign up',

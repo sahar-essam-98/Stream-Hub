@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 3), () {
       // String route = SharedPrefController().loggedIn ? '/OnBoarding': '/Sign_in';
       Navigator.pushReplacementNamed(context, '/interests_screen');
-      showAlertDialog(context);
+      // showAlertDialog(context);
     });
   }
 
@@ -60,10 +60,8 @@ class _SplashScreenState extends State<SplashScreen> {
         "Continue",
         style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
       ),
-        onPressed: () => Navigator.of(context).pop()
-
+        onPressed: () {Navigator.of(context).pop();}
     );
-
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
@@ -81,14 +79,12 @@ class _SplashScreenState extends State<SplashScreen> {
       actions: [
         cancelButton,
         continueButton,
-
       ],
     );
 
     // show the dialog
     showDialog(
-
-      // barrierDismissible: false,
+      barrierDismissible: true,
       context: context,
       builder: (BuildContext context) {
         return alert;
