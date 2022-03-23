@@ -255,7 +255,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/email_activation');
+                        Navigator.pushReplacementNamed(context, '/congrats_screen');
                       },
                       child: Text(
                         'Sign up',
