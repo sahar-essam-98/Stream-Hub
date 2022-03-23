@@ -119,6 +119,7 @@ class _GenderScreenState extends State<GenderScreen> {
                 ),
                 onPressed: () {
                   Navigator.pushReplacementNamed(context, '/go_watching');
+                  // Navigator.pushReplacementNamed(context, '/go_watching');
                 },
                 child: Text('Next'),
               ),

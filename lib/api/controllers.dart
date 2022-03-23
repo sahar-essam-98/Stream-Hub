@@ -65,4 +65,23 @@ class Controller {
     }
   }
 
+  Future<dynamic> getCategories() async {
+    var res = await http.get(
+      Uri.parse("$apiurl/categories"),
+      headers: <String, String>{
+        'Context-Type': 'application/json;charSet=UTF-8'
+      },
+    );
+    final data = await json.decode(res.body);
+    print(data);
+    if (res.statusCode == 200) {
+      final data = await json.decode(res.body);
+      print(data);
+
+      return data;
+    } else {
+      return "error";
+    }
+  }
+
 }

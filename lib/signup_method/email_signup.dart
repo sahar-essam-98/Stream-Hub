@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_hub/api/controllers.dart';
 import 'package:stream_hub/widgets/constants.dart';
 
 class EmailSignUp extends StatefulWidget {
@@ -273,7 +274,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                           });
                           Navigator.pushReplacementNamed(context, '/congrats_screen');
                         });
-                        Navigator.pushReplacementNamed(context, '/congrats_screen');
+                        // Navigator.pushReplacementNamed(context, '/congrats_screen');
                       },
 
                       child: Text(

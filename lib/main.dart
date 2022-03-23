@@ -9,6 +9,8 @@ import 'package:stream_hub/signup_method/phone_signup.dart';
 import 'package:stream_hub/signup_method/sign_up_method.dart';
 import 'package:stream_hub/splash_screen.dart';
 
+import 'out_bording_screen/birth_date.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
@@ -40,6 +42,7 @@ class MyApp extends StatelessWidget {
             '/email_signUp': (context) => const EmailSignUp(),
             '/phone_signUp': (context) => const PhoneSignUp(),
             '/congrats_screen': (context) => const CongratsScreen(),
+            '/date_screen': (context) => const BirthDate(),
           },
         ),
       ),
