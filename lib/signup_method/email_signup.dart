@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stream_hub/api/controllers.dart';
 import 'package:stream_hub/widgets/constants.dart';
 
 class EmailSignUp extends StatefulWidget {
@@ -191,8 +190,8 @@ class _EmailSignUpState extends State<EmailSignUp> {
                       controller: _passwordTextEditingController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                        hintStyle: TextStyle(fontFamily: 'Poppins'),
+                        contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                        hintStyle: const TextStyle(fontFamily: 'Poppins'),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: color1,
@@ -274,6 +273,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                           });
                           Navigator.pushReplacementNamed(context, '/congrats_screen');
                         });
+                        Navigator.pushReplacementNamed(context, '/congrats_screen');
                       },
 
                       child: Text(

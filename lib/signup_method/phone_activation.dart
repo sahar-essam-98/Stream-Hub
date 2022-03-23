@@ -62,7 +62,7 @@ class _EmailActivationState extends State<EmailActivation> {
                   Container(
                     margin: EdgeInsets.only(top: 24.h, left: 16.w, right: 122.w),
                     child: Text(
-                      'We send code to your email',
+                      'We send code to your phone number',
                       style: TextStyle(
                         color: color1,
                         fontFamily: 'poppins',
