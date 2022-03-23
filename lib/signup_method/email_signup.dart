@@ -22,7 +22,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
   void initState() {
     super.initState();
     _nameTextEditingController = TextEditingController();
-    _nameTextEditingController = TextEditingController();
+    _emailTextEditingController = TextEditingController();
     _passwordTextEditingController = TextEditingController();
     _confirmPasswordTextEditingController = TextEditingController();
   }
@@ -186,8 +186,8 @@ class _EmailSignUpState extends State<EmailSignUp> {
                       controller: _passwordTextEditingController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                        hintStyle: TextStyle(fontFamily: 'Poppins'),
+                        contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                        hintStyle: const TextStyle(fontFamily: 'Poppins'),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: color1,
@@ -277,47 +277,4 @@ class _EmailSignUpState extends State<EmailSignUp> {
     );
   }
 
-  // Future<void> performRegister() async {
-  //   if (checkData()) {
-  //     await register();
-  //   }
-  // }
-  //
-  // bool checkData() {
-  //   if (_passwordTextEditingController.text.isNotEmpty &&
-  //       _nameTextEditingController.text.isNotEmpty &&
-  //       _passwordTextEditingController.text.isNotEmpty
-  //       ) {
-  //     return true;
-  //   }
-  //   showSnackBar(
-  //     context,
-  //     message: 'Enter required data!',
-  //     error: true,
-  //   );
-  //   return false;
-  // }
-  //
-  // Future<void> register() async {
-  //   bool status = await AuthApiController().register(context, user: user);
-  //
-  //   // if (status) {
-  //   //   Navigator.push(
-  //   //     context,
-  //   //     MaterialPageRoute(
-  //   //       builder: (context) =>
-  //   //           VerifyCode(phone: _phoneTextEditingController.text),
-  //   //     ),
-  //   //   );
-  //   // }
-  // }
-  //
-  // RegisterUser get user {
-  //   RegisterUser user = RegisterUser();
-  //   user.name = _nameTextEditingController.text;
-  //   user.password = _passwordTextEditingController.text;
-  //   user.mobile = _emailTextEditingController.text;
-  //
-  //   return user;
-  // }
 }

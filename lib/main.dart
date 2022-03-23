@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
             '/phone_signUp': (context) => const PhoneSignUp(),
             '/email_activation': (context) => const EmailActivation(),
             '/congrats_screen': (context) => const CongratsScreen(),
+            '/email_activation' : (context)=> const EmailActivation(),
           },
         ),
       ),
