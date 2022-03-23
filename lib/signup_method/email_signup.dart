@@ -259,6 +259,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                           borderRadius: BorderRadius.circular(15.0.r),
                         ),
                       ),
+
                       onPressed: () {
                         setState(() {
                           isloading = true;
