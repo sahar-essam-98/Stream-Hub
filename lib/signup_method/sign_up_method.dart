@@ -213,7 +213,7 @@ class _SignUpMethodsState extends State<SignUpMethods> {
                   ),
 
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 100.w, vertical: 14.h),
+                    margin: EdgeInsets.symmetric(horizontal: 90.w, vertical: 14.h),
                     child: Row(
                       children: [
                         RichText(

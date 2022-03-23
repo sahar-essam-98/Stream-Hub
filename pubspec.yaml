@@ -38,6 +38,7 @@ dependencies:
   font_awesome_flutter: ^10.0.0
   auto_size_text: ^3.0.0
   get: ^4.6.1
+  http: ^0.13.4
   flutter_app_minimizer: ^0.0.2
 
 dev_dependencies:
