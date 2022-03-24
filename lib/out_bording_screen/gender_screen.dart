@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_hub/get/general_controller.dart';
 import 'package:stream_hub/widgets/constants.dart';
 
 class GenderScreen extends StatefulWidget {
@@ -74,6 +75,7 @@ class _GenderScreenState extends State<GenderScreen> {
                       ),
                     ),
                     onPressed: () {
+                      GeneralDataController.to.gender.value = 0;
                       // child: Icon(Icons.female,size: 55,color: Colors.red,);
                     },
                     child: Icon(
@@ -95,7 +97,9 @@ class _GenderScreenState extends State<GenderScreen> {
                         borderRadius: BorderRadius.circular(18.0.r),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      GeneralDataController.to.gender.value = 1;
+                    },
                     child: Icon(
                       Icons.male,
                       size: 55,
@@ -137,6 +141,7 @@ class _GenderScreenState extends State<GenderScreen> {
                   ),
                 ),
                 onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/go_watching');
                   // Navigator.pushReplacementNamed(context, 'routeName');
                 },
                 child: Text(

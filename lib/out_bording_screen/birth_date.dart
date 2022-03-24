@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_hub/get/general_controller.dart';
 import 'package:stream_hub/widgets/constants.dart';
 
 class birthDate extends StatefulWidget {
@@ -118,6 +119,7 @@ class _birthDateState extends State<birthDate> {
                      if (newDate ==null) return ;
                      setState(() {
                        date = newDate;
+                       GeneralDataController.to.date.value = "${date.day}-${date.month}-${date.year}";
                      });
                     },
                     child: Container(
@@ -150,7 +152,8 @@ class _birthDateState extends State<birthDate> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/go_watching');
+                        Navigator.pushReplacementNamed(context, '/signUp_method');
+                        // Navigator.pushReplacementNamed(context, '/go_watching');
                       },
                       child: Text(
                         'Confirm',

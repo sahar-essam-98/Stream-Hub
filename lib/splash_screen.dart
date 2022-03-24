@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_minimizer/flutter_app_minimizer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_hub/helper/shared_prefrences_helper.dart';
 import 'package:stream_hub/widgets/constants.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,9 +19,16 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    // SharedPrefrencesHelper.sharedPrefrencesHelper.setIsLogin(false);
     Future.delayed(const Duration(seconds: 3), () {
-      // String route = SharedPrefController().loggedIn ? '/OnBoarding': '/Sign_in';
-      Navigator.pushReplacementNamed(context, '/interests_screen');
+      String route;
+      if(SharedPrefrencesHelper.sharedPrefrencesHelper.getLogin() != null){
+        route = SharedPrefrencesHelper.sharedPrefrencesHelper.getLogin()! ? '/OnBoarding': '/Sign_in' ;
+      }else{
+        route ='/interests_screen';
+      }
+
+      Navigator.pushReplacementNamed(context, route);
       // showAlertDialog(context);
     });
   }

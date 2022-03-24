@@ -4,14 +4,14 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_hub/widgets/constants.dart';
 
-class EmailSignUp extends StatefulWidget {
-  const EmailSignUp({Key? key}) : super(key: key);
+class EmailSignIn extends StatefulWidget {
+  const EmailSignIn({Key? key}) : super(key: key);
 
   @override
-  _EmailSignUpState createState() => _EmailSignUpState();
+  _EmailSignInState createState() => _EmailSignInState();
 }
 
-class _EmailSignUpState extends State<EmailSignUp> {
+class _EmailSignInState extends State<EmailSignIn> {
 
 
 
@@ -53,7 +53,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
                   Container(
                     margin: EdgeInsets.only(top: 24.h, left: 16.w),
                     child: Text(
-                      'SignUp',
+                      'Login',
                       style: TextStyle(
                         color: color2,
                         fontFamily: 'poppins',
@@ -184,6 +184,4 @@ class _EmailSignUpState extends State<EmailSignUp> {
       ),
     );
   }
-
-
 }
