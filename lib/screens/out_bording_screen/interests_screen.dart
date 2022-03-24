@@ -181,7 +181,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/go_watching');
+                        // Navigator.pushReplacementNamed(context, 'routeName');
                       },
                       child: Text(
                         'Skip',

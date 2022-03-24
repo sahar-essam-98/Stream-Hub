@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_hub/main_page.dart';
 import 'package:stream_hub/widgets/constants.dart';
 
 class CongratsScreen extends StatefulWidget {
@@ -61,7 +62,8 @@ class _CongratsScreenState extends State<CongratsScreen> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/signUp_method');
+                    Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => MainPage(),),);
                   },
                   child: Text(
                     'Start Watching',

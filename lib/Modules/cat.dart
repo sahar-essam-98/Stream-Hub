@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
+
 class Cat {
   int? id;
   String? name;
+  Color color = Colors.white;
 
   Cat({this.id, this.name});
 
