@@ -280,9 +280,9 @@ class _EmailSignUpState extends State<EmailSignUp> {
                                 isloading = true;
                               });
                               var name = _nameTextEditingController.text;
-                              var email = _nameTextEditingController.text;
-                              var password = _nameTextEditingController.text;
-                              var confirm = _nameTextEditingController.text;
+                              var email = _emailTextEditingController.text;
+                              var password = _passwordTextEditingController.text;
+                              var confirm = _confirmPasswordTextEditingController.text;
 
                               Controller()
                                   .Register(
