@@ -35,11 +35,15 @@ class Controller {
     }
   }
 
-  Future<dynamic> Register({name,
+  Future<dynamic> Register({
+        name,
         email,
         mobile,
         password,
-        confirmPassword}) async {
+        confirmPassword,
+        interests,
+        gender,
+        birthdate}) async {
 
     var mydata = {
       "name": '$name',
@@ -47,7 +51,11 @@ class Controller {
       "voice": '$password',
       "mobile": '$mobile',
       "email": '$email',
+      "interests": '$interests',
+      "gender": '$gender',
+      "birthdate": '$birthdate',
     };
+
     var res = await http.post(Uri.parse("$apiurl/register"),
         headers: <String, String>{
           'Context-Type': 'application/json;charSet=UTF-8'
@@ -58,7 +66,6 @@ class Controller {
     if (res.statusCode == 200) {
       final data = await json.decode(res.body);
       print(data);
-
       return data;
     } else {
       return "error";
@@ -84,4 +91,27 @@ class Controller {
     }
   }
 
+  Future<dynamic> Login({email, password}) async {
+
+    var mydata = {
+      "email": '$email',
+      "password": '$password',
+    };
+
+    var res = await http.post(Uri.parse("$apiurl/login"),
+        headers: <String, String>{
+          'Context-Type': 'application/json;charSet=UTF-8'
+        },
+        body: mydata);
+    print("ggggggggggggg ${res}");
+
+    if (res.statusCode == 200) {
+      final data = await json.decode(res.body);
+      print(data);
+
+      return data;
+    } else {
+      return "error";
+    }
+  }
 }

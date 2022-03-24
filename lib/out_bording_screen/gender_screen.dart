@@ -112,13 +112,13 @@ class _GenderScreenState extends State<GenderScreen> {
               child: ElevatedButton(
                 style: TextButton.styleFrom(
                   minimumSize: Size(0, 126.h),
-                  backgroundColor: Color(0xff242424),
+                  backgroundColor: const Color(0xff242424),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0.r),
                   ),
                 ),
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/go_watching');
+                  Navigator.pushReplacementNamed(context, '/date_screen');
                   // Navigator.pushReplacementNamed(context, '/go_watching');
                 },
                 child: Text('Next'),
