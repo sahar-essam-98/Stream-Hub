@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Widget getIcon(icon, size, count) {
+Widget getIcon(icon, size, count,{color = Colors.white}) {
   return Column(
     children: [
       Icon(
         icon,
-        color: Colors.white,
+        color: color,
         size: size,
       ),
       SizedBox(
