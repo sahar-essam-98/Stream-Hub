@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_hub/api/controllers.dart';
-import 'package:stream_hub/widgets/constants.dart';
-import 'package:stream_hub/widgets/get_album_widget.dart';
-import 'package:stream_hub/widgets/get_icon_widget.dart';
+import 'package:stream_hub/screens/comment_screen.dart';
+import 'package:stream_hub/widgets/circle_animation.dart';
+import 'package:stream_hub/widgets/video_player_item.dart';
+
+
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-  late var data;
+class _HomePageState extends State<HomePage> {
 
   bool isloading = false;
-
+  late var data;
   late ScrollController _controller;
 
   getPost() async {
@@ -27,24 +27,24 @@ class _HomePageState extends State<HomePage>
     });
     try {
       Controller().getPost().then((value) => {
+        setState(() {
+          isloading = false;
+        }),
+        if (value != null)
+          {
             setState(() {
-              isloading = false;
-            }),
-            if (value != null)
-              {
-                setState(() {
-                  data = value['data'];
+              data = value['data'];
 
-                  // value.forEach((v) {
-                  //   _tags.add(Cat.fromJson(v));
-                  // });
-                }),
-                print("the data is ${value['data']}"),
-                // print("the data here is ${_tags[0].name}")
-              }
-            else
-              {}
-          });
+              // value.forEach((v) {
+              //   _tags.add(Cat.fromJson(v));
+              // });
+            }),
+            print("the data is ${value['data']}"),
+            // print("the data here is ${_tags[0].name}")
+          }
+        else
+          {}
+      });
     } catch (e) {
       print(e);
       setState(() {
@@ -56,252 +56,219 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     _controller = ScrollController();
-    _tabController = TabController(length: 2, vsync: this);
     getPost();
     super.initState();
   }
 
+  Color color = Colors.white;
+
+
+  likeBtn(index) {
+    setState(() {
+      // if (videos[index].likes.contains(videos[index].uid)) {
+      //   videos[index].likes.remove(videos[index].uid);
+      // } else {
+      //   videos[index].likes.add(videos[index].uid);
+      // }
+    });
+  }
+
+  goToComment(BuildContext context) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: ((context) => const CommentScreen())));
+  }
+
+  buildMusicAlbum(String profilePhoto) {
+    return SizedBox(
+      width: 60,
+      height: 60,
+      child: Column(
+        children: [
+          Container(
+              padding: const EdgeInsets.all(11),
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [
+                      Colors.grey,
+                      Colors.white,
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(25)),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: Image(
+                  image: AssetImage(profilePhoto),
+                  fit: BoxFit.cover,
+                ),
+              ))
+        ],
+      ),
+    );
+  }
+
+  buildProfile(String profilePhoto) {
+    return SizedBox(
+      width: 60,
+      height: 60,
+      child: Stack(
+        children: [
+          Positioned(
+            left: 5,
+            child: Container(
+              width: 50,
+              height: 50,
+              margin: const EdgeInsets.all(1),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+                border: Border.all(color: Colors.white),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: Image(
+                  image: AssetImage(profilePhoto),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          const Positioned(
+            bottom: 2,
+            left: 23,
+            child: CircleAvatar(
+              backgroundColor: Colors.red,
+              radius: 8,
+              child: Icon(
+                Icons.add,
+                size: 10,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    return isloading
-        ? const Center(
-            child: CircularProgressIndicator(),
-          )
-        : Container(
-            width: size.width,
-            height: size.height,
-            decoration: BoxDecoration(
-              color: Colors.black,
-            ),
-            child: Stack(
+    return Scaffold(
+      body: PageView.builder(
+          // itemCount: videos.length,
+          controller: PageController(initialPage: 0, viewportFraction: 1),
+          scrollDirection: Axis.vertical,
+          itemBuilder: (context, index) {
+            return Stack(
               children: [
-                Container(
-                  width: size.width,
-                  height: size.height,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                  ),
-                ),
-                Container(
-                  width: size.width,
-                  height: size.height,
-                  child: SafeArea(
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          top: 25.h, right: 15.w, left: 15.w, bottom: 10.h),
-                      child: Column(
-                          children: [
-                            HeaderHomePage(),
-                            Expanded(
-                              flex: 1,
-                              child: ListView.builder(
-                                itemCount: data.length,
-                                  itemBuilder: (context, index) {
-
-                                return Row(
+                // VideoPlayerItem(
+                //   videoUrl: videos[index].videoUrl,
+                // ),
+                Column(
+                  children: [
+                    const SizedBox(height: 100),
+                    Expanded(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                   ' videos[index].username',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                   ' // videos[index].caption',
+                                    style: const TextStyle(fontSize: 13),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.music_note, size: 15),
+                                      Text(
+                                       ' videos[index].songName',
+                                        style: const TextStyle(fontSize: 15),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 100,
+                            margin: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height / 5),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                // buildProfile(videos[index].profilePhoto),
+                                Column(
                                   children: [
-                                    LeftPanel(
-                                      size: size,
-                                      name: data[index]['title'],
-                                      caption: data[index]['description'],
-                                      songName: '',
+                                    Column(
+                                      children: [
+                                        InkWell(
+                                            onTap: () => {likeBtn(index)},
+                                            child: Icon(
+                                              Icons.favorite,
+                                              size: 30,
+                                              color:
+                                              // videos[index].likes.isNotEmpty
+                                                  // ? Colors.red
+                                                   Colors.white,
+                                            )),
+                                        Text('videos[index].likes.length.toString()')
+                                      ],
                                     ),
-                                    // Right panel
-                                    Container(
-                                      height: size.height,
-                                      // decoration: BoxDecoration(
-                                      //   color: Colors.blue,
-                                      // ),
+                                    const SizedBox(height: 20),
+                                    InkWell(
+                                      onTap: () => {goToComment(context)},
                                       child: Column(
-                                        // crossAxisAlignment: CrossAxisAlignment.stretch,
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Container(
-                                            height: size.height * 0.3,
-                                          ),
-                                          Expanded(
-                                            child: Container(
-                                              child: Column(
-                                                // crossAxisAlignment: CrossAxisAlignment.stretch,
-                                                // mainAxisSize: MainAxisSize.max,
-                                                // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                children: [
-                                                  getProfile(
-                                                      'https://imagej.net/images/baboon.jpg'),
-                                                  InkWell(
-                                                    onTap:(){
-                                                      setState(() {
-                                                        isloading=true;
-                                                      });
-                                                      Controller().addLike(post_id: data[index]['id'],description: data[index]['description']).then((value) {
-                                                        setState(() {
-                                                          isloading = false;
-                                                        });
-                                                      });
-                                                    },
-                                                    child: getIcon(Icons.favorite, 35.0,
-                                                        '${data[index]['favorites_count']}',color: data[index]['is_favorite']?Colors.red:Colors.white),
-                                                  ),
-                                                  getIcon(
-                                                      Icons.chat, 35.0, '${data[index]['comments_count']}'),
-                                                  getIcon(Icons.ios_share, 35.0,
-                                                      '78K'),
-                                                  getAlbum(
-                                                      'https://imagej.net/images/baboon.jpg'),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
+                                          const Icon(Icons.comment, size: 30),
+                                          Text('videos[index].commentCount.toString()')
                                         ],
                                       ),
                                     ),
+                                    const SizedBox(height: 20),
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Column(
+                                        children: [
+                                          const Icon(Icons.reply, size: 30),
+                                          Text('videos[index].shareCount.toString()')
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 30),
+                                    // CircleAnimation(
+                                      // child: buildMusicAlbum(videos[index].profilePhoto),
+                                    // ),
                                   ],
-                                );
-                              }),
-                            )
-                          ],
-                        )
-                      )
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-              ],
-            ));
-  }
-
-  Widget getProfile(profileImg) {
-    return Container(
-      width: 55.w,
-      height: 55.h,
-      child: Stack(
-        children: [
-          Container(
-            height: 50.h,
-            width: 50.w,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.white),
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                  image: NetworkImage(profileImg), fit: BoxFit.cover),
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 18.w,
-            child: Container(
-              width: 20.w,
-              height: 20.h,
-              decoration:
-                  BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
-              child: Center(
-                child: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 15,
+                  ],
                 ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class LeftPanel extends StatelessWidget {
-  final String name;
-  final String caption;
-  final String songName;
-
-  const LeftPanel(
-      {Key? key,
-      required this.size,
-      required this.name,
-      required this.caption,
-      required this.songName})
-      : super(key: key);
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 10.w),
-      height: size.height,
-      width: size.width * 0.78,
-      decoration: BoxDecoration(
-        color: color1,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            name,
-            style: TextStyle(color: Colors.white),
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Text(
-            caption,
-            style: TextStyle(color: Colors.white),
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Row(
-            children: [
-              Icon(
-                Icons.music_note,
-                color: Colors.white,
-                size: 15,
-              ),
-              Text(songName)
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class HeaderHomePage extends StatelessWidget {
-  const HeaderHomePage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'For You',
-          style: TextStyle(
-              color: Colors.white.withOpacity(0.5),
-              fontWeight: FontWeight.bold,
-              fontSize: 16.sp),
-        ),
-        SizedBox(
-          width: 5.w,
-        ),
-        Text(
-          '|',
-          style:
-              TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 16.sp),
-        ),
-        SizedBox(
-          width: 5.w,
-        ),
-        Text(
-          'Trending',
-          style:
-              TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 16.sp),
-        ),
-      ],
+              ],
+            );
+          }),
     );
   }
 }

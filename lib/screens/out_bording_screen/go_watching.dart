@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stream_hub/main_page.dart';
+import 'package:stream_hub/screens/home_page.dart';
+import 'package:stream_hub/screens/nav.dart';
 import 'package:stream_hub/widgets/constants.dart';
 
 class GoWatching extends StatefulWidget {
@@ -75,7 +76,7 @@ class _GoWatchingState extends State<GoWatching> {
                 ),
                 onPressed: () {
                   Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => MainPage(),),);
+                    context, MaterialPageRoute(builder: (context) => NavScreen(),),);
                 },
                 child: Text(
                   'Start Watching',
